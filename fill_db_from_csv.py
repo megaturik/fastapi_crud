@@ -1,9 +1,10 @@
 import csv
 
-from app.db.schemas import DifficultLevelCreate, QuestionCreate
-from app.db.models import Difficult_Level, Question
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
+
+from app.db.models import Difficult_Level, Question
+from app.db.schemas import DifficultLevelCreate, QuestionCreate
 from app.settings import settings
 
 diff_levels = ('Легкий', 'Средний', 'Сложный', 'Финал')
