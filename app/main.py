@@ -1,18 +1,39 @@
 from http import HTTPStatus
+from typing import List
+
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
 from app.db.funcs import get_db
-from app.db.models import Question
-from app.db.schemas import QuestionRead
+from app.db.models import Question, Answer
+from app.db.schemas import QuestionList, QuestionRead, QuestionCreate
 
 app = FastAPI()
 
 
-@app.get("/api/v1/questions/")
+@app.get("/api/v1/questions/", response_model=List[QuestionList])
 def get_question(db: Session = Depends(get_db)):
     """Возвращает все вопросы."""
     return db.query(Question).all()
+
+
+@app.post("/api/v1/questions/", response_model=QuestionCreate)
+def create_question(question: QuestionCreate, db: Session = Depends(get_db)):
+    """Создает новый вопрос."""
+    new_question = Question(
+        text=question.text,
+        difficult_id=question.difficult_id
+    )
+    new_question.answers = [
+        Answer(
+            text=answer.text,
+            is_correct=answer.is_correct
+        ) for answer in question.answers
+    ]
+    db.add(new_question)
+    db.commit()
+    db.refresh(new_question)
+    return new_question
 
 
 @app.get("/api/v1/questions/{question_id}", response_model=QuestionRead)

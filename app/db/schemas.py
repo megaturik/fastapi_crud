@@ -27,6 +27,11 @@ class QuestionCreate(BaseModel):
         return value
 
 
+class QuestionList(BaseModel):
+    id: int = Field(..., example=1)
+    text: str = Field(..., example="Столица Франции?")
+
+
 class QuestionRead(BaseModel):
-    text: str
+    text: str = Field(..., example="Столица Франции?")
     answers: List[AnswerCreate]
