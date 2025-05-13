@@ -26,11 +26,12 @@ class Question(Base):
     __tablename__ = "questions"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    text: Mapped[str] = mapped_column(Text, nullable=False, unique=True)
+    text: Mapped[str] = mapped_column(Text, nullable=False, unique=False)
     difficult_id: Mapped[int] = mapped_column(ForeignKey(Difficult_Level.id))
     difficulty: Mapped["Difficult_Level"] = (
         relationship(back_populates="questions")
     )
+    answers: Mapped[List["Answer"]] = relationship(back_populates="question", cascade="all, delete-orphan")
 
 
 class Answer(Base):
@@ -44,6 +45,7 @@ class Answer(Base):
     )
     text: Mapped[str] = mapped_column(Text, nullable=False)
     is_correct: Mapped[bool] = mapped_column(Boolean, nullable=False)
+    question: Mapped["Question"] = relationship(back_populates="answers")
 
 
 class Player(Base):

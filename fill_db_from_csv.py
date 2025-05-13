@@ -1,9 +1,10 @@
 import csv
 
 from sqlalchemy import create_engine
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from app.db.models import Difficult_Level, Question
+from app.db.models import Answer, Difficult_Level, Question
 from app.db.schemas import DifficultLevelCreate, QuestionCreate
 from app.settings import settings
 
@@ -22,11 +23,18 @@ def create_diff_level(dto: DifficultLevelCreate, db: Session):
 
 
 def create_question(dto: QuestionCreate, db: Session):
-    question = Question(**dto.model_dump())
-    db.add(question)
-    db.commit()
-    db.refresh(question)
-    return question
+    try:
+        new_question = Question(text=dto.text, difficult_id=dto.difficult_id)
+        new_question.answers = [
+            Answer(text=answer.text, is_correct=answer.is_correct) for answer in dto.answers
+        ]
+        db.add(new_question)
+        db.commit()
+        db.refresh(new_question)
+        return new_question
+    except SQLAlchemyError as e:
+        db.rollback()
+        raise RuntimeError(f"Ошибка при сохранении вопроса: {str(e)}")
 
 
 for level in diff_levels:
