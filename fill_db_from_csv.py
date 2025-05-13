@@ -26,7 +26,10 @@ def create_question(dto: QuestionCreate, db: Session):
     try:
         new_question = Question(text=dto.text, difficult_id=dto.difficult_id)
         new_question.answers = [
-            Answer(text=answer.text, is_correct=answer.is_correct) for answer in dto.answers
+            Answer(
+                text=answer.text,
+                is_correct=answer.is_correct
+            ) for answer in dto.answers
         ]
         db.add(new_question)
         db.commit()
@@ -43,7 +46,15 @@ for level in diff_levels:
 
 with open('questions.csv') as csvfile:
     reader = csv.reader(csvfile, delimiter=';')
-    for diff_level, question, answer_a, answer_b, answer_c, answer_d, correct_answer in reader:
+    for (
+        diff_level,
+        question,
+        answer_a,
+        answer_b,
+        answer_c,
+        answer_d,
+        correct_answer
+    ) in reader:
         correct_answer = int(correct_answer)
         data = {
             "text": question,

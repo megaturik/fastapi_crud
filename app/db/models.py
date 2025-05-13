@@ -31,7 +31,9 @@ class Question(Base):
     difficulty: Mapped["Difficult_Level"] = (
         relationship(back_populates="questions")
     )
-    answers: Mapped[List["Answer"]] = relationship(back_populates="question", cascade="all, delete-orphan")
+    answers: Mapped[List["Answer"]] = relationship(
+        back_populates="question",
+        cascade="all, delete-orphan")
 
 
 class Answer(Base):
