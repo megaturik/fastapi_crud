@@ -25,3 +25,8 @@ class QuestionCreate(BaseModel):
         if not any(answer.is_correct for answer in value):
             raise ValueError("Хотя бы один ответ должен быть правильным.")
         return value
+
+
+class QuestionRead(BaseModel):
+    text: str
+    answers: List[AnswerCreate]
