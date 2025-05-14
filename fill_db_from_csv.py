@@ -4,8 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from app.db.models import Answer, Difficult_Level, Question
-from app.db.schemas import DifficultLevelCreate, QuestionCreate
+from app.models import Answer, Difficult_Level, Question
+from app.schemas import DifficultLevelCreate, QuestionCreate
 from app.settings import settings
 
 diff_levels = ('Легкий', 'Средний', 'Сложный', 'Финал')

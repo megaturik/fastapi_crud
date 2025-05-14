@@ -17,7 +17,7 @@ def get_question(db: Session = Depends(get_db)):
     return db.query(Question).all()
 
 
-@app.post("/api/v1/questions/", response_model=QuestionCreate)
+@app.post("/api/v1/questions/")
 def create_question(question: QuestionCreate, db: Session = Depends(get_db)):
     """Создает новый вопрос."""
     new_question = Question(

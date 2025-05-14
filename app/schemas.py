@@ -22,8 +22,10 @@ class QuestionCreate(BaseModel):
     def check_answers(cls, value: List):
         if len(value) != 4:
             raise ValueError("Нам нужно 4 ответа для каждого вопроса.")
-        if not any(answer.is_correct for answer in value):
-            raise ValueError("Хотя бы один ответ должен быть правильным.")
+        if sum(answer.is_correct for answer in value) != 1:
+            raise ValueError("Один из ответов должен быть правильным.")
+        if len(value) != len(set(answer.text for answer in value)):
+            raise ValueError("Все ответы должны быть уникальными.")
         return value
 
 
