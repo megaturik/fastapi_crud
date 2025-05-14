@@ -4,9 +4,9 @@ from typing import List
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
-from app.db.funcs import get_db
-from app.db.models import Question, Answer
-from app.db.schemas import QuestionList, QuestionRead, QuestionCreate
+from app.db import get_db
+from app.models import Answer, Question
+from app.schemas import QuestionCreate, QuestionList, QuestionRead
 
 app = FastAPI()
 
