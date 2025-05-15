@@ -2,14 +2,14 @@
 
 REST API на FastAPI для работы с вопросами и ответами (например, для викторин или обучающих платформ).
 
-В учебных целях, посмотреть FastAPI, Pydantic, SQLAlchemy + Alembic
+В учебных целях, посмотреть стек.
 
 ## Стек
+- Postgres
 - SQLAlchemy 2.0.40 + Alembic
 - Pydantic 
 - FastAPI 0.115
 - Python 3.9+
-- Postgres
 
 ## Быстрый старт
 
