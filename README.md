@@ -70,7 +70,9 @@ fastapi dev app/main.py
   "difficult_id": 1,
   "answers": [
     {"text": "Париж", "is_correct": true},
-    {"text": "Лондон", "is_correct": false}
+    {"text": "Челябинск", "is_correct": false},
+    {"text": "Чиангмай", "is_correct": false},
+    {"text": "Новый Уренгой", "is_correct": false}
   ]
 }
 ```
