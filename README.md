@@ -57,7 +57,7 @@ alembic upgrade head
 python3 fill_db_from_csv.py
 ```
 
-### Запуск приложения
+## Запуск приложения
 
 ```bash
 fastapi dev app/main.py
