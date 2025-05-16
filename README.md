@@ -31,6 +31,24 @@ POSTGRES_HOST = localhost
 ```
 
 ## Заполнение базы тестовыми данными:
+Запускаеv Postgres через docker-compose, реквизиты доступа подтягиваются из общего .env:
+
+```bash
+docker compose up -d 
+```
+Создаем базу данных скриптом init_db.py:
+
+```bash
+python3 init_db.py
+```
+
+Или через alembic в проекте:
+
+```bash
+alembic upgrade head
+```
+
+
 В test-data/questions.csv есть некоторе количество подготовленных вопросов.
 
 Можно добавить их в базу:
