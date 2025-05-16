@@ -65,5 +65,5 @@ class Player(Base):
         DateTime, default=datetime.now(timezone.utc)
     )
     is_superuser: Mapped[bool] = mapped_column(
-        Boolean, nullable=False, default=0)
+        Boolean, nullable=False, default=False)
     total_games_played: Mapped[int] = mapped_column(Integer, default=0)
