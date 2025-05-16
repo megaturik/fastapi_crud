@@ -56,8 +56,14 @@ class Player(Base):
     __tablename__ = "players"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    name: Mapped[str] = mapped_column(String(100), nullable=False)
+    username: Mapped[str] = mapped_column(
+        String(100), nullable=False, unique=True)
+    password: Mapped[str] = mapped_column(String(60), nullable=False)
+    email: Mapped[str] = mapped_column(
+        String(320), nullable=False, unique=True)
     registration_date: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now(timezone.utc)
     )
+    is_superuser: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=0)
     total_games_played: Mapped[int] = mapped_column(Integer, default=0)
